@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block title %}Draw Result - Drawing App{% endblock %}
+
+{% block content %}
+    <h2>Draw Result</h2>
+    <p>Here’s who was drawn:</p>
+
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">
+                {% if person.owner_id == request.GET.user_id %}
+                    You drew:
+                {% else %}
+                    {{ person.name }} drew:
+                {% endif %}
+            </h5>
+            <p class="card-text">
+                <strong>Name:</strong> {{ drawn.name }}<br>
+                <strong>Age:</strong> {{ drawn.age }}<br>
+                <strong>Gender:</strong> {{ drawn.gender }}<br>
+                <strong>Extra Info:</strong> {{ drawn.extra_info|default:"None provided" }}
+            </p>
+        </div>
+    </div>
+
+    <a href="{% url 'draw' user_id=request.GET.user_id %}" class="btn btn-primary mt-3">Back to Draw</a>
+    <a href="{% url 'register' %}?user_id={{ request.GET.user_id }}" class="btn btn-secondary mt-3">Add More Participants</a>
+{% endblock %}

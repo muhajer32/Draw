@@ -1,7 +1,13 @@
 from django.db import models
 
-# Create your models here.
-from django.db import models
+# Create your models here
+
+class Settings(models.Model):
+    gift_price_limit = models.DecimalField(max_digits=6, decimal_places=2, default=20.00)
+    drawing_enabled = models.BooleanField(default=False)
+
+    def __str__(self):
+        return "Gift Exchange Settings"
 
 class AgeGroup(models.Model):
     name = models.CharField(max_length=50)
@@ -14,7 +20,12 @@ class AgeGroup(models.Model):
 class Person(models.Model):
     name = models.CharField(max_length=100)
     age = models.IntegerField()
-    gender = models.TextChoices('gender', 'Male Female')
+    GenderChoices = models.TextChoices('Gender', 'MALE FEMALE')
+    gender = models.CharField(
+        max_length=6,
+        choices=GenderChoices.choices,
+        default=GenderChoices.MALE
+    )
     extra_info = models.TextField(blank=True)
     age_group = models.ForeignKey(AgeGroup, on_delete=models.CASCADE)
     owner_id = models.CharField(max_length=50)  # WhatsApp/Telegram ID

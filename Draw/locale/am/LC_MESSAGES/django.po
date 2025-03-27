@@ -1,0 +1,218 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-03-26 00:20+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgid "Eid Gift Exchange"
+msgstr "የኢድ ስጦታ ልውውጥ"
+msgid "Join the Eid Gift Exchange!"
+msgstr "የኢድ ስጦታ ልውውጥ ይቀላቀሉ!"
+msgid "Register your family members for a fun Eid gift exchange. Kids and adults welcome!"
+msgstr "የቤተሰብ አባላትዎን ለኢድ ስጦታ ልውውጥ ያስመዝግቡ። ልጆችና አዋቂዎች እንኳን ደህና መጡ!"
+msgid "Your Registered Family Members"
+msgstr "የተመዘገቡ የቤተሰብ አባላትዎ"
+msgid "Add a New Family Member"
+msgstr "አዲስ የቤተሰብ አባል ይጨምሩ"
+msgid "Name"
+msgstr "ስም"
+msgid "Age"
+msgstr "ዕድሜ"
+msgid "Gender"
+msgstr "ፆታ"
+msgid "Select"
+msgstr "ምረጥ"
+msgid "Male"
+msgstr "ወንድ"
+msgid "Female"
+msgstr "ሴት"
+msgid "Other"
+msgstr "ሌላ"
+msgid "Extra Info (e.g., gift preferences)"
+msgstr "ተጨማሪ መረጃ (ለምሳሌ፣ የስጦታ ምርጫዎች)"
+msgid "Register"
+msgstr "ይመዝገቡ"
+# Add more as needed
+msgid "Eid Secret Gift Exchange"
+msgstr "የኢድ ሚስጥራዊ ስጦታ ልውውጥ"
+msgid "Gift Price Limit"
+msgstr "የስጦታ ዋጋ ገደብ"
+msgid "Secret Buddy Assigned"
+msgstr "ሚስጥራዊ ጓደኛ ተመድቧል"
+msgid "Waiting for Admin to Enable Drawing"
+msgstr "መሳል እስኪነቃ ድረስ አስተዳዳሪን መጠበቅ"
+msgid "Message Your Secret Buddy"
+msgstr "ለሚስጥራዊ ጓደኛህ መልእክት ላክ"
+msgid "Your Family’s Status"
+msgstr "የቤተሰብህ ሁኔታ"
+msgid "All Participants"
+msgstr "ሁሉም ተሳታፊዎች"
+msgid "No participants yet."
+msgstr "ገና ተሳታፊዎች የሉም።"
+msgid "Congratulations!"
+msgstr "እንኳን ደስ አለህ!"
+#: eidraw/templates/base.html:7 eidraw/templates/base.html:71
+msgid "Eid Gift Exchange"
+msgstr ""
+
+#: eidraw/templates/base.html:81
+msgid "Choose Your Language"
+msgstr ""
+
+#: eidraw/templates/base.html:84
+msgid "Please select your preferred language:"
+msgstr ""
+
+#: eidraw/templates/base.html:92
+msgid "Save"
+msgstr ""
+
+#: eidraw/templates/draw.html:4
+msgid "Draw Your Eid Gift Buddy"
+msgstr ""
+
+#: eidraw/templates/draw.html:7
+msgid "Draw Your Eid Gift Buddy!"
+msgstr ""
+
+#: eidraw/templates/draw.html:8
+msgid ""
+"Click to find out who your family member will exchange gifts with this Eid!"
+msgstr ""
+
+#: eidraw/templates/draw.html:15
+msgid "Your Family Members"
+msgstr ""
+
+#: eidraw/templates/draw.html:22 eidraw/templates/register.html:17
+#: eidraw/templates/result.html:35
+msgid "Drew"
+msgstr ""
+
+#: eidraw/templates/draw.html:22
+msgid "View Details"
+msgstr ""
+
+#: eidraw/templates/draw.html:28
+msgid "Draw"
+msgstr ""
+
+#: eidraw/templates/draw.html:35
+msgid "No family members registered yet. Add some!"
+msgstr ""
+
+#: eidraw/templates/draw.html:38 eidraw/templates/result.html:53
+msgid "Add More Family Members"
+msgstr ""
+
+#: eidraw/templates/register.html:4
+msgid "Join Eid Gift Exchange"
+msgstr ""
+
+#: eidraw/templates/register.html:7
+msgid "Join the Eid Gift Exchange!"
+msgstr ""
+
+#: eidraw/templates/register.html:8
+msgid ""
+"Register your family members for a fun Eid gift exchange. Kids and adults "
+"welcome!"
+msgstr ""
+
+#: eidraw/templates/register.html:11
+msgid "Your Registered Family Members"
+msgstr ""
+
+#: eidraw/templates/register.html:24
+msgid "Add a New Family Member"
+msgstr ""
+
+#: eidraw/templates/register.html:29 eidraw/templates/result.html:20
+msgid "Name"
+msgstr ""
+
+#: eidraw/templates/register.html:33 eidraw/templates/result.html:21
+msgid "Age"
+msgstr ""
+
+#: eidraw/templates/register.html:37 eidraw/templates/result.html:22
+msgid "Gender"
+msgstr ""
+
+#: eidraw/templates/register.html:39
+msgid "Select"
+msgstr ""
+
+#: eidraw/templates/register.html:40
+msgid "Male"
+msgstr ""
+
+#: eidraw/templates/register.html:41
+msgid "Female"
+msgstr ""
+
+#: eidraw/templates/register.html:42
+msgid "Other"
+msgstr ""
+
+#: eidraw/templates/register.html:46
+msgid "Extra Info (e.g., gift preferences)"
+msgstr ""
+
+#: eidraw/templates/register.html:49
+msgid "Register"
+msgstr ""
+
+#: eidraw/templates/result.html:4
+msgid "Your Eid Gift Match"
+msgstr ""
+
+#: eidraw/templates/result.html:7
+msgid "Your Eid Gift Match!"
+msgstr ""
+
+#: eidraw/templates/result.html:8
+msgid "Here’s who you’ll exchange gifts with this Eid!"
+msgstr ""
+
+#: eidraw/templates/result.html:14
+msgid "You drew"
+msgstr ""
+
+#: eidraw/templates/result.html:16
+msgid "drew"
+msgstr ""
+
+#: eidraw/templates/result.html:23
+msgid "Extra Info"
+msgstr ""
+
+#: eidraw/templates/result.html:29
+msgid "Your Family’s Draws"
+msgstr ""
+
+#: eidraw/templates/result.html:37
+msgid "Not drawn yet"
+msgstr ""
+
+#: eidraw/templates/result.html:44
+msgid "Shop for Your Eid Gift!"
+msgstr ""
+
+#: eidraw/templates/result.html:52
+msgid "Back to Draw"
+msgstr ""
+

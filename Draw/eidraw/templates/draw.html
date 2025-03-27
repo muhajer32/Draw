@@ -1,31 +1,41 @@
 {% extends 'base.html' %}
+{% load i18n %}
 
-{% block title %}Draw - Drawing App{% endblock %}
+{% block title %}{% trans "Draw Your Secret Eid Gift Buddy" %}{% endblock %}
 
 {% block content %}
-    <h2>Draw a Name</h2>
-    <p>Select a participant to draw a name for them.</p>
+    <h2>{% trans "Draw Your Secret Eid Gift Buddy!" %}</h2>
+    <p>{% trans "Click to secretly find out who your family member will gift this Eid!" %}</p>
 
     {% if error %}
         <div class="alert alert-warning">{{ error }}</div>
     {% endif %}
 
     {% if persons %}
+        <h3>{% trans "Your Family Members" %}</h3>
         <ul class="list-group mb-4">
             {% for person in persons %}
                 <li class="list-group-item d-flex justify-content-between align-items-center">
                     {{ person.name }} (Age: {{ person.age }}, {{ person.gender }})
-                    <form method="post" action="{% url 'draw' user_id=request.GET.user_id %}">
-                        {% csrf_token %}
-                        <input type="hidden" name="person_id" value="{{ person.id }}">
-                        <button type="submit" class="btn btn-success btn-sm">Draw</button>
-                    </form>
+                    {% if person.has_drawn %}
+                        <a href="{% url 'result' person_id=person.id %}" class="badge bg-success">
+                            {% trans "Secret Buddy Assigned" %} ({% trans "View Details" %})
+                        </a>
+                    {% elif drawing_enabled %}
+                        <form method="post" action="{% url 'draw' user_id=user_id %}">
+                            {% csrf_token %}
+                            <input type="hidden" name="person_id" value="{{ person.id }}">
+                            <button type="submit" class="btn btn-success btn-sm">{% trans "Draw" %}</button>
+                        </form>
+                    {% else %}
+                        <span class="badge bg-secondary">{% trans "Waiting for Admin to Enable Drawing" %}</span>
+                    {% endif %}
                 </li>
             {% endfor %}
         </ul>
     {% else %}
-        <p>No participants available to draw right now. Register more or wait for others to join!</p>
+        <p>{% trans "No family members registered yet. Add some!" %}</p>
     {% endif %}
 
-    <a href="{% url 'register' %}?user_id={{ request.GET.user_id }}" class="btn btn-secondary">Add More Participants</a>
+    <a href="{% url 'register' %}?user_id={{ user_id }}" class="btn btn-primary">{% trans "Add More Family Members" %}</a>
 {% endblock %}

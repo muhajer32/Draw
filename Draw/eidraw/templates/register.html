@@ -1,36 +1,55 @@
 {% extends 'base.html' %}
+{% load i18n %}
 
-{% block title %}Register - Drawing App{% endblock %}
+{% block title %}{% trans "Join Eid Secret Gift Exchange" %}{% endblock %}
 
 {% block content %}
-    <h2>Register Participants</h2>
-    <p>Use this form to register yourself and any additional participants (e.g., children).</p>
-    
+    <h2>{% trans "Join the Eid Secret Gift Exchange!" %}</h2>
+    <p>{% trans "Register your family members for a secret Eid gift exchange. Kids and adults welcome!" %}</p>
+
+    {% if registered_persons %}
+        <h3>{% trans "Your Registered Family Members" %}</h3>
+        <ul class="list-group mb-4">
+            {% for person in registered_persons %}
+                <li class="list-group-item">
+                    {{ person.name }} (Age: {{ person.age }}, {{ person.gender }})
+                    {% if person.has_drawn %}
+                        - {% trans "Secret Buddy Assigned" %}
+                    {% endif %}
+                </li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
+    <h3>{% trans "Add a New Family Member" %}</h3>
     <form method="post" class="mb-4">
         {% csrf_token %}
+        <input type="hidden" name="user_id" value="{{ user_id }}">
         <div class="mb-3">
-            <label for="name" class="form-label">Name</label>
+            <label for="name" class="form-label">{% trans "Name" %}</label>
             <input type="text" class="form-control" id="name" name="name" required>
         </div>
         <div class="mb-3">
-            <label for="age" class="form-label">Age</label>
+            <label for="age" class="form-label">{% trans "Age" %}</label>
             <input type="number" class="form-control" id="age" name="age" min="0" required>
         </div>
         <div class="mb-3">
-            <label for="gender" class="form-label">Gender</label>
+            <label for="gender" class="form-label">{% trans "Gender" %}</label>
             <select class="form-select" id="gender" name="gender" required>
-                <option value="">Select Gender</option>
-                <option value="Male">Male</option>
-                <option value="Female">Female</option>
-                <option value="Other">Other</option>
+                <option value="">{% trans "Select" %}</option>
+                <option value="Male">{% trans "Male" %}</option>
+                <option value="Female">{% trans "Female" %}</option>
+                <option value="Other">{% trans "Other" %}</option>
             </select>
         </div>
         <div class="mb-3">
-            <label for="extra_info" class="form-label">Extra Info (Optional)</label>
+            <label for="extra_info" class="form-label">{% trans "Extra Info (e.g., gift preferences)" %}</label>
             <textarea class="form-control" id="extra_info" name="extra_info" rows="3"></textarea>
         </div>
-        <button type="submit" class="btn btn-primary">Register and Proceed to Draw</button>
+        <button type="submit" class="btn btn-primary">{% trans "Register" %}</button>
     </form>
 
-    <p><em>Note:</em> To add more participants (e.g., children), you can extendmultiple times this form or revisit this page after drawing.</p>
+    {% if error %}
+        <div class="alert alert-danger">{{ error }}</div>
+    {% endif %}
 {% endblock %}

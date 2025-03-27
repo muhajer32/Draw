@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block title %}Draw - Drawing App{% endblock %}
+
+{% block content %}
+    <h2>Draw a Name</h2>
+    <p>Select a participant to draw a name for them.</p>
+
+    {% if error %}
+        <div class="alert alert-warning">{{ error }}</div>
+    {% endif %}
+
+    {% if persons %}
+        <ul class="list-group mb-4">
+            {% for person in persons %}
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    {{ person.name }} (Age: {{ person.age }}, {{ person.gender }})
+                    <form method="post" action="{% url 'draw' user_id=user_id %}">
+                        {% csrf_token %}
+                        <input type="hidden" name="person_id" value="{{ person.id }}">
+                        <button type="submit" class="btn btn-success btn-sm">Draw</button>
+                    </form>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No participants available to draw right now. Register more or wait for others to join!</p>
+    {% endif %}
+
+    <a href="{% url 'register' %}?user_id={{ user_id }}" class="btn btn-secondary">Add More Participants</a>
+{% endblock %}

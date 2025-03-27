@@ -1,29 +1,61 @@
 {% extends 'base.html' %}
+{% load i18n %}
 
-{% block title %}Draw Result - Drawing App{% endblock %}
+{% block title %}{% trans "Your Secret Eid Gift Match" %}{% endblock %}
 
 {% block content %}
-    <h2>Draw Result</h2>
-    <p>Here’s who was drawn:</p>
+    <h2 class="text-center" style="color: #FFD700; text-shadow: 2px 2px 4px #1a5d1a;">
+        {% trans "Congratulations!" %}
+    </h2>
+    <p class="text-center">{% trans "You’ve found your secret Eid gift buddy! Get ready to make their day special!" %}</p>
 
-    <div class="card">
+    <div class="card mb-4 text-center">
         <div class="card-body">
             <h5 class="card-title">
-                {% if person.owner_id == request.GET.user_id %}
-                    You drew:
+                {% if person.owner_id == user_id %}
+                    {% trans "Your Secret Gift Buddy" %}:
                 {% else %}
-                    {{ person.name }} drew:
+                    {{ person.name }}'s {% trans "Secret Gift Buddy" %}:
                 {% endif %}
             </h5>
             <p class="card-text">
-                <strong>Name:</strong> {{ drawn.name }}<br>
-                <strong>Age:</strong> {{ drawn.age }}<br>
-                <strong>Gender:</strong> {{ drawn.gender }}<br>
-                <strong>Extra Info:</strong> {{ drawn.extra_info|default:"None provided" }}
+                <strong>{% trans "Name" %}:</strong> {{ drawn.name }}<br>
+                <strong>{% trans "Age" %}:</strong> {{ drawn.age }}<br>
+                <strong>{% trans "Gender" %}:</strong> {{ drawn.gender }}<br>
+                <strong>{% trans "Extra Info" %}:</strong> {{ drawn.extra_info|default:"None provided" }}
             </p>
+            <a href="#" class="btn btn-primary mt-2" onclick="alert('Messaging feature coming soon!');">
+                {% trans "Message Your Secret Buddy" %}
+            </a>
         </div>
     </div>
 
-    <a href="{% url 'draw' user_id=request.GET.user_id %}" class="btn btn-primary mt-3">Back to Draw</a>
-    <a href="{% url 'register' %}?user_id={{ request.GET.user_id }}" class="btn btn-secondary mt-3">Add More Participants</a>
+    {% if registered_persons %}
+        <h3>{% trans "Your Family’s Status" %}</h3>
+        <ul class="list-group mb-4">
+            {% for person in registered_persons %}
+                <li class="list-group-item">
+                    {{ person.name }} (Age: {{ person.age }}, {{ person.gender }})
+                    {% if person.has_drawn %}
+                        - {% trans "Secret Buddy Assigned" %}
+                    {% else %}
+                        - {% trans "Not drawn yet" %}
+                    {% endif %}
+                </li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
+    <h3>{% trans "Shop for Your Eid Gift!" %}</h3>
+    <div class="mb-4 text-center">
+        <a href="https://www.amazon.com" target="_blank" class="btn btn-primary me-2">Amazon</a>
+        <a href="https://www.walmart.com" target="_blank" class="btn btn-primary me-2">Walmart</a>
+        <a href="https://www.temu.com" target="_blank" class="btn btn-primary me-2">Temu</a>
+        <a href="https://www.shein.com" target="_blank" class="btn btn-primary">Shein</a>
+    </div>
+
+    <div class="text-center">
+        <a href="{% url 'draw' user_id=user_id %}" class="btn btn-success mt-3">{% trans "Back to Draw" %}</a>
+        <a href="{% url 'register' %}?user_id={{ user_id }}" class="btn btn-primary mt-3">{% trans "Add More Family Members" %}</a>
+    </div>
 {% endblock %}

@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block title %}Join Eid Gift Exchange{% endblock %}
+
+{% block content %}
+    <h2>Join the Eid Gift Exchange! / የኢድ ስጦታ ልውውጥ ይቀላቀሉ!</h2>
+    <p>Register your family members for a fun Eid gift exchange. Kids and adults welcome! / የቤተሰብ አባላትዎን ለኢድ ስጦታ ልውውጥ ያስመዝግቡ። ልጆችና አዋቂዎች እንኳን ደህና መጡ!</p>
+    
+    <form method="post" class="mb-4">
+        {% csrf_token %}
+        <input type="hidden" name="user_id" value="{{ user_id }}">
+        <div class="mb-3">
+            <label for="name" class="form-label">Name / ስም</label>
+            <input type="text" class="form-control" id="name" name="name" required>
+        </div>
+        <div class="mb-3">
+            <label for="age" class="form-label">Age / ዕድሜ</label>
+            <input type="number" class="form-control" id="age" name="age" min="0" required>
+        </div>
+        <div class="mb-3">
+            <label for="gender" class="form-label">Gender / ፆታ</label>
+            <select class="form-select" id="gender" name="gender" required>
+                <option value="">Select / ምረጥ</option>
+                <option value="Male">Male / ወንድ</option>
+                <option value="Female">Female / ሴት</option>
+                <option value="Other">Other / ሌላ</option>
+            </select>
+        </div>
+        <div class="mb-3">
+            <label for="extra_info" class="form-label">Extra Info (e.g., gift preferences) / ተጨማሪ መረጃ (ለምሳሌ፣ የስጦታ ምርጫዎች)</label>
+            <textarea class="form-control" id="extra_info" name="extra_info" rows="3"></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Register / ይመዝገቡ</button>
+    </form>
+
+    {% if error %}
+        <div class="alert alert-danger">{{ error }}</div>
+    {% endif %}
+{% endblock %}

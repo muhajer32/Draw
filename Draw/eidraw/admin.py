@@ -3,4 +3,6 @@ from .models import *
 # Register your models here.
 admin.site.register(AgeGroup)
 admin.site.register(Person)
-admin.site.register(Settings)
+#admin.site.register(Settings)
+admin.site.register(Group)
+admin.site.register(Exclusion)

@@ -25,8 +25,8 @@ SECRET_KEY = "django-insecure-%a99v6q7yond&k5$xo81%^86gv3aaox!maek^o(m7eufx#k7+c
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'eidraw.onrender.com']  # Replace with your Render domain
-CSRF_TRUSTED_ORIGINS = ['https://eidraw.onrender.com']  # For POST requests
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'eidnameraw.onrender.com']  # Replace with your Render domain
+CSRF_TRUSTED_ORIGINS = ['https://eidnamedraw.onrender.com']  # For POST requests
 
 # Application definition
 

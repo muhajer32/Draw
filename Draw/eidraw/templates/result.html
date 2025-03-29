@@ -9,10 +9,10 @@
     </h2>
     <p class="text-center">{% trans "You’ve found your secret Eid gift buddy! Get ready to make their day special!" %}</p>
 
-    <div class="card mb-4 text-center">
+    <div class="card mb-4 text-center" style="background: rgba(255, 255, 255, 0.9); color: #333;">
         <div class="card-body">
             <h5 class="card-title">
-                {% if person.owner_id == user_id %}
+                {% if person.telegram_id == telegram_id %}
                     {% trans "Your Secret Gift Buddy" %}:
                 {% else %}
                     {{ person.name }}'s {% trans "Secret Gift Buddy" %}:
@@ -22,11 +22,8 @@
                 <strong>{% trans "Name" %}:</strong> {{ drawn.name }}<br>
                 <strong>{% trans "Age" %}:</strong> {{ drawn.age }}<br>
                 <strong>{% trans "Gender" %}:</strong> {{ drawn.gender }}<br>
-                <strong>{% trans "Extra Info" %}:</strong> {{ drawn.extra_info|default:"None provided" }}
+                <strong>{% trans "Wishlist" %}:</strong> {{ drawn.wishlist|default:"None provided" }}
             </p>
-            <a href="#" class="btn btn-primary mt-2" onclick="alert('Messaging feature coming soon!');">
-                {% trans "Message Your Secret Buddy" %}
-            </a>
         </div>
     </div>
 
@@ -34,7 +31,7 @@
         <h3>{% trans "Your Family’s Status" %}</h3>
         <ul class="list-group mb-4">
             {% for person in registered_persons %}
-                <li class="list-group-item">
+                <li class="list-group-item" style="background: rgba(255, 255, 255, 0.9); color: #333;">
                     {{ person.name }} (Age: {{ person.age }}, {{ person.gender }})
                     {% if person.has_drawn %}
                         - {% trans "Secret Buddy Assigned" %}
@@ -55,7 +52,7 @@
     </div>
 
     <div class="text-center">
-        <a href="{% url 'draw' user_id=user_id %}" class="btn btn-success mt-3">{% trans "Back to Draw" %}</a>
-        <a href="{% url 'register' %}?user_id={{ user_id }}" class="btn btn-primary mt-3">{% trans "Add More Family Members" %}</a>
+        <a href="{% url 'draw' group_id=group.uuid telegram_id=telegram_id %}" class="btn btn-success mt-3">{% trans "Back to Draw" %}</a>
+        <a href="{% url 'register' group_id=group.uuid %}?telegram_id={{ telegram_id }}" class="btn btn-primary mt-3">{% trans "Add More Family Members" %}</a>
     </div>
 {% endblock %}

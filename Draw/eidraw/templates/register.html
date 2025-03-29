@@ -6,13 +6,13 @@
 {% block content %}
     <h2>{% trans "Join the Eid Secret Gift Exchange!" %}</h2>
     <p>{% blocktrans with group_name=group.name %}Register for {{ group_name }}{% endblocktrans %}</p>
-    <p>{% trans "Share this link in WhatsApp:" %} <a href="{{ request.build_absolute_uri }}">{{ request.build_absolute_uri }}</a></p>
+    <p>{% trans "Share this link in Telegram:" %} <a href="{{ bot_link }}">{{ bot_link }}</a></p>
 
     {% if registered_persons %}
         <h3>{% trans "Your Registered Family Members" %}</h3>
         <ul class="list-group mb-4">
             {% for person in registered_persons %}
-                <li class="list-group-item">
+                <li class="list-group-item" style="background: rgba(255, 255, 255, 0.9); color: #333;">
                     {{ person.name }} (Age: {{ person.age }}, {{ person.gender }})
                     {% if person.has_drawn %}
                         - {% trans "Secret Buddy Assigned" %}
@@ -25,10 +25,7 @@
     <h3>{% trans "Add Yourself or a Family Member" %}</h3>
     <form method="post" class="mb-4">
         {% csrf_token %}
-        <div class="mb-3">
-            <label for="user_id" class="form-label">{% trans "Your WhatsApp/Telegram ID" %}</label>
-            <input type="text" class="form-control" id="user_id" name="user_id" value="{{ user_id }}" required placeholder="e.g., +1234567890">
-        </div>
+        <input type="hidden" name="telegram_id" value="{{ telegram_id }}">
         <div class="mb-3">
             <label for="name" class="form-label">{% trans "Name" %}</label>
             <input type="text" class="form-control" id="name" name="name" required>
@@ -64,12 +61,11 @@
         <button type="submit" class="btn btn-primary w-100">{% trans "Register" %}</button>
     </form>
 
-    {% if request.GET.user_id == group.organizer_email or request.POST.organizer_email == group.organizer_email %}
+    {% if telegram_id == group.organizer_telegram_id %}
         {% if not group.drawing_enabled %}
             <form method="post" class="mb-4">
                 {% csrf_token %}
                 <input type="hidden" name="enable_drawing" value="true">
-                <input type="hidden" name="organizer_email" value="{{ group.organizer_email }}">
                 <button type="submit" class="btn btn-success w-100">{% trans "Enable Drawing for All" %}</button>
             </form>
         {% else %}

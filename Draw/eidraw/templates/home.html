@@ -5,16 +5,13 @@
 
 {% block content %}
     <h2>{% trans "Create Your Eid Gift Exchange Group" %}</h2>
-    <p>{% trans "Enter your email to create a group and share the link via WhatsApp!" %}</p>
+    <p>{% trans "Start a secret gift exchange!" %}</p>
     <form method="post" class="mb-4">
         {% csrf_token %}
+        <input type="hidden" name="telegram_id" value="{{ telegram_id }}">
         <div class="mb-3">
             <label for="group_name" class="form-label">{% trans "Group Name" %}</label>
             <input type="text" class="form-control" id="group_name" name="group_name" required>
-        </div>
-        <div class="mb-3">
-            <label for="organizer_email" class="form-label">{% trans "Your Email" %}</label>
-            <input type="email" class="form-control" id="organizer_email" name="organizer_email" required>
         </div>
         <button type="submit" class="btn btn-primary w-100">{% trans "Create Group" %}</button>
     </form>

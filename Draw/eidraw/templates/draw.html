@@ -5,7 +5,7 @@
 
 {% block content %}
     <h2>{% trans "Draw Your Secret Eid Gift Buddy!" %}</h2>
-    <p>{% trans "Click to secretly find out who your family member will gift this Eid!" %}</p>
+    <p>{% blocktrans with group_name=group.name %}Get ready to draw for {{ group_name }}!{% endblocktrans %}</p>
 
     {% if error %}
         <div class="alert alert-warning">{{ error }}</div>
@@ -15,27 +15,42 @@
         <h3>{% trans "Your Family Members" %}</h3>
         <ul class="list-group mb-4">
             {% for person in persons %}
-                <li class="list-group-item d-flex justify-content-between align-items-center">
+                <li class="list-group-item d-flex justify-content-between align-items-center" style="background: rgba(255, 255, 255, 0.9); color: #333;">
                     {{ person.name }} (Age: {{ person.age }}, {{ person.gender }})
                     {% if person.has_drawn %}
                         <a href="{% url 'result' person_id=person.id %}" class="badge bg-success">
                             {% trans "Secret Buddy Assigned" %} ({% trans "View Details" %})
                         </a>
-                    {% elif drawing_enabled %}
-                        <form method="post" action="{% url 'draw' user_id=user_id %}">
+                    {% elif group.drawing_enabled %}
+                        <form method="post" action="{% url 'draw' group_id=group.uuid telegram_id=telegram_id %}">
                             {% csrf_token %}
                             <input type="hidden" name="person_id" value="{{ person.id }}">
                             <button type="submit" class="btn btn-success btn-sm">{% trans "Draw" %}</button>
                         </form>
                     {% else %}
-                        <span class="badge bg-secondary">{% trans "Waiting for Admin to Enable Drawing" %}</span>
+                        <span class="badge bg-secondary">{% trans "Waiting for Organizer to Enable Drawing" %}</span>
                     {% endif %}
                 </li>
             {% endfor %}
         </ul>
     {% else %}
         <p>{% trans "No family members registered yet. Add some!" %}</p>
+        <a href="{% url 'register' group_id=group.uuid %}?telegram_id={{ telegram_id }}" class="btn btn-primary">{% trans "Register Now" %}</a>
     {% endif %}
 
-    <a href="{% url 'register' %}?user_id={{ user_id }}" class="btn btn-primary">{% trans "Add More Family Members" %}</a>
+    {% if group.drawing_enabled %}
+        <p class="text-success">{% trans "Drawing is enabled! Pick your secret buddy!" %}</p>
+    {% else %}
+        {% if telegram_id == group.organizer_telegram_id %}
+            <form method="post" class="mb-4">
+                {% csrf_token %}
+                <input type="hidden" name="enable_drawing" value="true">
+                <button type="submit" class="btn btn-success w-100">{% trans "Enable Drawing for All" %}</button>
+            </form>
+        {% else %}
+            <p>{% trans "Waiting for the organizer to enable drawing." %}</p>
+        {% endif %}
+    {% endif %}
+
+    <a href="{% url 'register' group_id=group.uuid %}?telegram_id={{ telegram_id }}" class="btn btn-primary">{% trans "Add More Family Members" %}</a>
 {% endblock %}
